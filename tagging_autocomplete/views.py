@@ -11,7 +11,7 @@ except ImportError:
 def list_tags(request):
     try:
         tags = [{'id': tag.id, 'label': tag.name, 'value': tag.name}
-                for tag in Tag.objects.filter(name__istartswith=request.GET['term'])]
+                for tag in Tag.objects.filter(name__istartswith=request.GET['term'])[:settings.MAX_NUMBER_OF_RESULTS]]
     except MultiValueDictKeyError:
         raise Http404
 
